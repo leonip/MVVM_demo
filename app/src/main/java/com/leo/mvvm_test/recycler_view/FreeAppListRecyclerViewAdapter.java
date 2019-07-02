@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.leo.mvvm_test.R;
 import com.leo.mvvm_test.dao.FreeAppEntry;
@@ -13,13 +14,12 @@ import java.util.ArrayList;
 public class FreeAppListRecyclerViewAdapter extends RecyclerView.Adapter<FreeAppListRecyclerViewAdapter.MyViewHolder>{
     private ArrayList<FreeAppEntry> mDataset;
 
+    final private static int CELL_TYPE_ODD = 1;
+    final private static int CELL_TYPE_EVEN = 0;
+
     // Constructor
     public FreeAppListRecyclerViewAdapter(ArrayList<FreeAppEntry> dataset) {
         mDataset = dataset;
-    }
-
-    public FreeAppListRecyclerViewAdapter() {
-
     }
 
     // Create new views (invoked by the layout manager)
@@ -30,26 +30,27 @@ public class FreeAppListRecyclerViewAdapter extends RecyclerView.Adapter<FreeApp
         View view = inflater.inflate(R.layout.cell_free_app, parent, false);
         MyViewHolder vh = new MyViewHolder(view);
 
-
-//        MyViewHolder vh = new MyViewHolder(new FlexboxLayout_Example(parent.getContext()).addCell(viewType).getView());
-
         return vh;
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        // - replace the contents of the view with that element
+        FreeAppEntry appInfo = mDataset.get(position);
+        String index = Integer.toString(position+1);
+        holder.txtPosition.setText(index);
+        holder.txtTitle.setText(appInfo.name.label);
+        holder.txtType.setText(appInfo.category.attributes.label);
+        holder.txtRating.setText("70");
     }
 
     @Override
     public int getItemViewType(int position) {
-//        if(position == /* position of item that needs extra text view */) {
-//            return VIEW_WITH_EXTRA_TEXT_VIEW;
-//        } else {
-//            return VIEW_ORDINARY;
-//        }
-        return position;
+        if(position%2 == 1) {
+            return CELL_TYPE_ODD;
+        } else {
+            return CELL_TYPE_EVEN;
+        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -60,9 +61,20 @@ public class FreeAppListRecyclerViewAdapter extends RecyclerView.Adapter<FreeApp
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public View mView;
+        public TextView txtPosition;
+        public TextView txtTitle;
+        public TextView txtType;
+        public TextView txtRating;
         public MyViewHolder(View mView) {
             super(mView);
             this.mView = mView;
+            this.txtPosition = mView.findViewById(R.id.txtPosition);
+            this.txtTitle = mView.findViewById(R.id.txtTitle);
+            this.txtType = mView.findViewById(R.id.txtType);
+            this.txtRating = mView.findViewById(R.id.txtRating);
         }
     }
+
+
+
 }
