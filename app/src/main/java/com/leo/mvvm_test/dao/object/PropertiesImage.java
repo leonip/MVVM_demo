@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.leo.mvvm_test.dao.object.AttributesHeight;
 
 public class PropertiesImage {
-    @SerializedName("name")
+    @SerializedName("label")
     public String label;
     @SerializedName("attributes")
     public AttributesHeight attributes;
