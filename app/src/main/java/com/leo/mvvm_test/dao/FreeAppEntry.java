@@ -1,6 +1,7 @@
 package com.leo.mvvm_test.dao;
 
 import com.google.gson.annotations.SerializedName;
+import com.leo.mvvm_test.dao.object.PropertiesCategory;
 import com.leo.mvvm_test.dao.object.PropertiesImage;
 import com.leo.mvvm_test.dao.object.PropertiesLabel;
 import com.leo.mvvm_test.dao.object.PropertiesLink;
@@ -11,21 +12,24 @@ import java.util.ArrayList;
 
 public class FreeAppEntry {
     @SerializedName("im:name")
-    PropertiesLabel label;
+    public PropertiesLabel name;
     @SerializedName("im:image")
-    ArrayList<PropertiesImage> image;
+    public ArrayList<PropertiesImage> image;
     @SerializedName("summary")
-    PropertiesLabel summary;
+    public PropertiesLabel summary;
     @SerializedName("im:price")
-    PropertiesPrice price;
+    public PropertiesPrice price;
     @SerializedName("im:contentType")
-    PropertiesType type;
+    public PropertiesType type;
     @SerializedName("rights")
-    PropertiesLabel rights;
+    public PropertiesLabel rights;
     @SerializedName("title")
-    PropertiesLabel title;
+    public PropertiesLabel title;
     @SerializedName("link")
-    PropertiesLink link;
+    public PropertiesLink link;
     // id
+    @SerializedName("category")
+    public PropertiesCategory category;
+
 }
 

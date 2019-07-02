@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class AttributesLink {
     @SerializedName("rel")
-    String rel;
+    public String rel;
     @SerializedName("type")
-    String type;
+    public String type;
     @SerializedName("href")
-    String href;
+    public String href;
 }

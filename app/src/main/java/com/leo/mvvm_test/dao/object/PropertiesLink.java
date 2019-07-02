@@ -5,5 +5,5 @@ import com.leo.mvvm_test.dao.object.AttributesLink;
 
 public class PropertiesLink {
     @SerializedName("attributes")
-    AttributesLink attributes;
+    public AttributesLink attributes;
 }

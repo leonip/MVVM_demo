@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class AttributesPrice {
     @SerializedName("amount")
-    String amount;
+    public String amount;
     @SerializedName("currency")
-    String currency;
+    public String currency;
 }

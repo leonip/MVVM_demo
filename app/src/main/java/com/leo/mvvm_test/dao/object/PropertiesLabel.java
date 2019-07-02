@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName;
 
 public class PropertiesLabel {
     @SerializedName("label")
-    String label;
+    public String label;
 }

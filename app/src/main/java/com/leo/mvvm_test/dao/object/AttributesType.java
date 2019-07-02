@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class AttributesType {
     @SerializedName("term")
-    String term;
-    @SerializedName("label")
-    String label;
+    public String term;
+    @SerializedName("name")
+    public String label;
 }

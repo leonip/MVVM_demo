@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName;
 
 public class AttributesHeight {
     @SerializedName("height")
-    String height;
+    public String height;
 }
