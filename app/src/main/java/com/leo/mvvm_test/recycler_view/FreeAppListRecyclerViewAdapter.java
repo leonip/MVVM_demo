@@ -1,13 +1,17 @@
 package com.leo.mvvm_test.recycler_view;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.leo.mvvm_test.R;
 import com.leo.mvvm_test.dao.FreeAppEntry;
+import com.leo.mvvm_test.dao.object.PropertiesImage;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -17,9 +21,11 @@ public class FreeAppListRecyclerViewAdapter extends RecyclerView.Adapter<FreeApp
     final private static int CELL_TYPE_ODD = 1;
     final private static int CELL_TYPE_EVEN = 0;
 
+
+
     // Constructor
     public FreeAppListRecyclerViewAdapter(ArrayList<FreeAppEntry> dataset) {
-        mDataset = dataset;
+        this.mDataset = dataset;
     }
 
     // Create new views (invoked by the layout manager)
@@ -42,6 +48,13 @@ public class FreeAppListRecyclerViewAdapter extends RecyclerView.Adapter<FreeApp
         holder.txtTitle.setText(appInfo.name.label);
         holder.txtType.setText(appInfo.category.attributes.label);
         holder.txtRating.setText("70");
+
+        PropertiesImage img = appInfo.image.get(0);
+        int length = Integer.parseInt(img.attributes.height);
+        Picasso.get()
+                .load(img.label)
+                .resize(length,length).into(holder.imgIcon);
+
     }
 
     @Override
@@ -65,6 +78,7 @@ public class FreeAppListRecyclerViewAdapter extends RecyclerView.Adapter<FreeApp
         public TextView txtTitle;
         public TextView txtType;
         public TextView txtRating;
+        public ImageView imgIcon;
         public MyViewHolder(View mView) {
             super(mView);
             this.mView = mView;
@@ -72,6 +86,7 @@ public class FreeAppListRecyclerViewAdapter extends RecyclerView.Adapter<FreeApp
             this.txtTitle = mView.findViewById(R.id.txtTitle);
             this.txtType = mView.findViewById(R.id.txtType);
             this.txtRating = mView.findViewById(R.id.txtRating);
+            this.imgIcon = mView.findViewById(R.id.imgIcon);
         }
     }
 
