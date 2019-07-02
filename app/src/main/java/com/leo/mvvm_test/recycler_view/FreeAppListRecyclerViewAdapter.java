@@ -11,7 +11,10 @@ import android.widget.TextView;
 import com.leo.mvvm_test.R;
 import com.leo.mvvm_test.dao.FreeAppEntry;
 import com.leo.mvvm_test.dao.object.PropertiesImage;
+import com.leo.mvvm_test.util.image.CircleTransform;
+import com.leo.mvvm_test.util.image.RoundedCornersTransformation;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
 
@@ -51,8 +54,12 @@ public class FreeAppListRecyclerViewAdapter extends RecyclerView.Adapter<FreeApp
 
         PropertiesImage img = appInfo.image.get(0);
         int length = Integer.parseInt(img.attributes.height);
+        Transformation transformType = position%2 == 1 ?
+                new CircleTransform() :
+                new RoundedCornersTransformation(10, 0);
         Picasso.get()
                 .load(img.label)
+                .transform(transformType)
                 .resize(length,length).into(holder.imgIcon);
 
     }
