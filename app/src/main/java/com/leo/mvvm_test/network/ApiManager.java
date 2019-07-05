@@ -17,6 +17,7 @@ import com.leo.mvvm_test.dao.FreeAppsResponse;
 public class ApiManager {
 
     private static final String TOPFREEAPP_API = "https://itunes.apple.com/hk/rss/topfreeapplications/limit=100/json";
+    private static final String RECOMMENDAPP_API = "https://itunes.apple.com/hk/rss/topgrossingapplications/limit=10/json";
     private RequestQueue requestQueue;
     private Gson gson_demo;
 
@@ -37,6 +38,18 @@ public class ApiManager {
 
     public void getTopFreeApplication(SuccessResponse<FreeAppsResponse> successResponse) {
         StringRequest request = new StringRequest(Request.Method.GET, TOPFREEAPP_API,
+                (response) -> {
+            FreeAppsResponse entity = gson_demo.fromJson(response, FreeAppsResponse.class);
+            successResponse.onSuccess(entity);
+        },
+                onPostsError);
+
+        requestQueue.add(request);
+
+    }
+
+    public void getRecommendApplication(SuccessResponse<FreeAppsResponse> successResponse) {
+        StringRequest request = new StringRequest(Request.Method.GET, RECOMMENDAPP_API,
                 (response) -> {
             FreeAppsResponse entity = gson_demo.fromJson(response, FreeAppsResponse.class);
             successResponse.onSuccess(entity);
