@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class MainActivityViewModel extends ViewModel {
     Context mContext;
     ApiManager api;
+    int index_paging = 0;
 
     public void init(Context mContext){
         this.mContext = mContext;
@@ -48,5 +49,11 @@ public class MainActivityViewModel extends ViewModel {
         api.getRecommendApplication((res) -> {
             recommendApps.setValue(res.getFreeAppsList());
         });
+    }
+
+
+    public ArrayList<FreeAppEntry> getNextTenApps() {
+        index_paging += 10;
+        return new ArrayList<>(freeApps.getValue().subList(index_paging,index_paging+10));
     }
 }
