@@ -20,19 +20,33 @@ public class MainActivityViewModel extends ViewModel {
 
     }
 
-    private MutableLiveData<ArrayList<FreeAppEntry>> users;
-    public LiveData<ArrayList<FreeAppEntry>> getUsers() {
-        if (users == null) {
-            users = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<FreeAppEntry>> freeApps;
+    private MutableLiveData<ArrayList<FreeAppEntry>> recommendApps;
+    public LiveData<ArrayList<FreeAppEntry>> getFreeApps() {
+        if (freeApps == null) {
+            freeApps = new MutableLiveData<>();
             loadFreeAppsList();
         }
-        return users;
+        return freeApps;
     }
 
     public void loadFreeAppsList() {
         api.getTopFreeApplication((res) -> {
-            users.setValue(res.getFreeAppsList());
+            freeApps.setValue(res.getFreeAppsList());
         });
+    }
 
+    public LiveData<ArrayList<FreeAppEntry>> getRecommendApps() {
+        if (recommendApps == null) {
+            recommendApps = new MutableLiveData<>();
+            loadRecommendAppsList();
+        }
+        return recommendApps;
+    }
+
+    public void loadRecommendAppsList() {
+        api.getRecommendApplication((res) -> {
+            recommendApps.setValue(res.getFreeAppsList());
+        });
     }
 }
