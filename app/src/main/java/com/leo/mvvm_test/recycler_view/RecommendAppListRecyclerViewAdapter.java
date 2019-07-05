@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.leo.mvvm_test.R;
 import com.leo.mvvm_test.dao.FreeAppEntry;
 import com.leo.mvvm_test.dao.object.PropertiesImage;
+import com.leo.mvvm_test.util.image.RoundedCornersTransformation;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -45,8 +46,8 @@ public class RecommendAppListRecyclerViewAdapter extends RecyclerView.Adapter<Re
         int length = Integer.parseInt(img.attributes.height);
         Picasso.get()
                 .load(img.label)
+                .transform(new RoundedCornersTransformation(10, 0))
                 .resize(length,length).into(holder.imgIcon);
-
     }
 
     @Override
