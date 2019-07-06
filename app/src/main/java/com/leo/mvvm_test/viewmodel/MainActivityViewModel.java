@@ -23,6 +23,9 @@ public class MainActivityViewModel extends ViewModel {
 
     private MutableLiveData<ArrayList<FreeAppEntry>> freeApps;
     private MutableLiveData<ArrayList<FreeAppEntry>> recommendApps;
+    private MutableLiveData<String> searchKeyword;
+    private MutableLiveData<ArrayList<FreeAppEntry>> searchResultApps;
+
     public LiveData<ArrayList<FreeAppEntry>> getFreeApps() {
         if (freeApps == null) {
             freeApps = new MutableLiveData<>();
@@ -51,9 +54,37 @@ public class MainActivityViewModel extends ViewModel {
         });
     }
 
-
     public ArrayList<FreeAppEntry> getNextTenApps() {
         index_paging += 10;
         return new ArrayList<>(freeApps.getValue().subList(index_paging,index_paging+10));
+    }
+
+    public MutableLiveData<String> getSearchKeyword() {
+        if (searchKeyword == null){
+            searchKeyword = new MutableLiveData<>();
+        }
+        return searchKeyword;
+    }
+
+    public void setSearchKeyword(String keyword) {
+        getSearchKeyword().setValue(keyword);
+        searchingApps();
+    }
+
+    public LiveData<ArrayList<FreeAppEntry>> getSearchResultApps() {
+        if (searchResultApps == null) {
+            searchResultApps = new MutableLiveData<>();
+        }
+        return searchResultApps;
+    }
+
+    private void searchingApps() {
+        ArrayList<FreeAppEntry> searchResultList = new ArrayList<>();
+        for (FreeAppEntry v : freeApps.getValue()) {
+            if (v.getTextForSearch().contains(searchKeyword.getValue())) {
+                searchResultList.add(v);
+            }
+        }
+        searchResultApps.postValue(searchResultList);
     }
 }

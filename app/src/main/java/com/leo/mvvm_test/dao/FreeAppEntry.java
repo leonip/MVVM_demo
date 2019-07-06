@@ -28,8 +28,18 @@ public class FreeAppEntry {
     @SerializedName("link")
     public PropertiesLink link;
     // id
+    @SerializedName("im:artist")
+    public PropertiesLabel artist;
     @SerializedName("category")
     public PropertiesCategory category;
+
+    public String getTextForSearch() {
+        return name.label+
+                category.attributes.term+
+                category.attributes.label+
+                artist.label+
+                summary.label;
+    }
 
 }
 

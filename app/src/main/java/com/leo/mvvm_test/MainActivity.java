@@ -1,10 +1,14 @@
 package com.leo.mvvm_test;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
@@ -42,6 +46,13 @@ public class MainActivity extends AppCompatActivity {
         rv.setAdapter(recommendAdapter);
         bodyList.addHeaderView(headerView);
 
+        TextInputEditText searchInput = findViewById(R.id.searchInput);
+        ListView searchResultListView = findViewById(R.id.searchResultList);
+        ArrayList<FreeAppEntry> searchResultList = new ArrayList<>();
+        FreeAppListViewAdapter searchResultAdapter = new FreeAppListViewAdapter(this,searchResultList);
+        searchResultListView.setAdapter(searchResultAdapter);
+
+
         model.getFreeApps().observe(this, (res) -> {
             freeAppList.addAll(res.subList(0, 10));
             freeAppAdapter.notifyDataSetChanged();
@@ -67,10 +78,39 @@ public class MainActivity extends AppCompatActivity {
                         if(model.getFreeApps().getValue() != null){
                             freeAppList.addAll(model.getNextTenApps());
                             freeAppAdapter.notifyDataSetChanged();
+
                         }
                     }
                 }
             }
+        });
+
+        searchInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                model.setSearchKeyword(s.toString());
+            }
+        });
+
+        model.getSearchKeyword().observe(this, (res) -> {
+            bodyList.setVisibility(res.length() == 0 ? View.VISIBLE : View.INVISIBLE);
+            searchResultListView.setVisibility(res.length() > 0 ? View.VISIBLE : View.INVISIBLE);
+        });
+
+        model.getSearchResultApps().observe(this, (res) -> {
+            searchResultList.clear();
+            searchResultList.addAll(res);
+            searchResultAdapter.notifyDataSetChanged();
         });
 
     }
