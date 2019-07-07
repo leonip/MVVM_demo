@@ -8,11 +8,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.leo.mvvm_test.dao.FreeAppEntry;
 import com.leo.mvvm_test.recycler_view.FreeAppListViewAdapter;
@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         FreeAppListViewAdapter freeAppAdapter = new FreeAppListViewAdapter(this,freeAppList);
         bodyList.setAdapter(freeAppAdapter);
 
+        ProgressBar bodyProgress = findViewById(R.id.bodyProgress);
+
         View headerView = LayoutInflater.from(this).inflate(R.layout.view_recommend,null, false);
         RecyclerView rv = headerView.findViewById(R.id.recommendList);
         rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         model.getRecommendApps().observe(this, (res) -> {
+            bodyProgress.setVisibility(res == null ? View.VISIBLE : View.INVISIBLE);
             recommendAppList.addAll(res);
             recommendAdapter.notifyItemRangeInserted(0,res.size());
         });
