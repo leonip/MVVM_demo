@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:textColor="@color/colorGrayText"
+            android:textSize="20dp"
             android:text="1"/>
     </RelativeLayout>
 
@@ -61,14 +62,31 @@
             android:layout_weight="1"
             android:orientation="horizontal"
             >
-            <info.androidhive.fontawesome.FontTextView
-                android:id="@+id/txtStars"
+            <ImageView
+                android:id="@+id/star1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="@string/fa_star_solid"
-                android:gravity="center"
-                android:textColor="#ffa500"
-                app:solid_icon="true" />
+                android:src="@drawable/ic_star_full"/>
+            <ImageView
+                android:id="@+id/star2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_star_full"/>
+            <ImageView
+                android:id="@+id/star3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_star_full"/>
+            <ImageView
+                android:id="@+id/star4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_star_empty"/>
+            <ImageView
+                android:id="@+id/star5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_star_empty"/>
 
             <TextView
                 android:id="@+id/txtRating"

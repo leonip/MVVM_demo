@@ -18,8 +18,6 @@ import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
 
-import info.androidhive.fontawesome.FontTextView;
-
 public class FreeAppListViewAdapter extends ArrayAdapter<FreeAppEntry> {
     private ArrayList<FreeAppEntry> mDataset;
 
@@ -41,7 +39,11 @@ public class FreeAppListViewAdapter extends ArrayAdapter<FreeAppEntry> {
             viewHolder.txtPosition = convertView.findViewById(R.id.txtPosition);
             viewHolder.txtTitle = convertView.findViewById(R.id.txtTitle);
             viewHolder.txtType = convertView.findViewById(R.id.txtType);
-            viewHolder.txtStars = convertView.findViewById(R.id.txtStars);
+            viewHolder.star1 = convertView.findViewById(R.id.star1);
+            viewHolder.star2 = convertView.findViewById(R.id.star2);
+            viewHolder.star3 = convertView.findViewById(R.id.star3);
+            viewHolder.star4 = convertView.findViewById(R.id.star4);
+            viewHolder.star5 = convertView.findViewById(R.id.star5);
             viewHolder.txtRating = convertView.findViewById(R.id.txtRating);
             viewHolder.imgIcon = convertView.findViewById(R.id.imgIcon);
 
@@ -55,13 +57,7 @@ public class FreeAppListViewAdapter extends ArrayAdapter<FreeAppEntry> {
         viewHolder.txtPosition.setText(index);
         viewHolder.txtTitle.setText(appInfo.name.label);
         viewHolder.txtType.setText(appInfo.category.attributes.label);
-        String starsStr = parent.getResources().getString(R.string.fa_star_solid)+" "
-                + parent.getResources().getString(R.string.fa_star_solid)+" "
-                + parent.getResources().getString(R.string.fa_star_solid)+" "
-                + parent.getResources().getString(R.string.fa_star_solid)+" "
-                + parent.getResources().getString(R.string.fa_star_solid)+" ";
 
-        viewHolder.txtStars.setText(starsStr);
         viewHolder.txtRating.setText("(70)");
 
         PropertiesImage img = appInfo.image.get(0);
@@ -83,6 +79,6 @@ public class FreeAppListViewAdapter extends ArrayAdapter<FreeAppEntry> {
         public TextView txtType;
         public TextView txtRating;
         public ImageView imgIcon;
-        public FontTextView txtStars;
+        public ImageView star1, star2, star3, star4, star5;
     }
 }
