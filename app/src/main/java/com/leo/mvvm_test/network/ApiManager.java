@@ -3,6 +3,7 @@ package com.leo.mvvm_test.network;
 import android.content.Context;
 import android.util.Log;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -44,6 +45,12 @@ public class ApiManager {
         },
                 onPostsError);
 
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+                3,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+
         requestQueue.add(request);
 
     }
@@ -55,6 +62,11 @@ public class ApiManager {
             successResponse.onSuccess(entity);
         },
                 onPostsError);
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+                3,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         requestQueue.add(request);
 
