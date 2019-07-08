@@ -9,6 +9,7 @@ import com.leo.mvvm_test.dao.object.PropertiesPrice;
 import com.leo.mvvm_test.dao.object.PropertiesType;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class FreeAppEntry {
     @SerializedName("im:name")
@@ -40,6 +41,27 @@ public class FreeAppEntry {
                 artist.label+
                 summary.label;
     }
+
+    private int ratingCount;
+    private int ratingStar;
+
+    public int getRatingCount() {
+        if(ratingCount == 0){
+            Random rand = new Random();
+            ratingCount = rand.nextInt(100)+10;
+        }
+        return ratingCount;
+    }
+
+
+    public int getRatingStar() {
+        if(ratingStar == 0){
+            Random rand = new Random();
+            ratingStar = rand.nextInt(5)+1;
+        }
+        return ratingStar;
+    }
+
 
 }
 

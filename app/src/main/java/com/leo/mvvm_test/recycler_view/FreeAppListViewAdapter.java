@@ -60,15 +60,12 @@ public class FreeAppListViewAdapter extends ArrayAdapter<FreeAppEntry> {
         viewHolder.txtPosition.setText(index);
         viewHolder.txtTitle.setText(appInfo.name.label);
         viewHolder.txtType.setText(appInfo.category.attributes.label);
-        Random rand = new Random();
-        int ratingCount = rand.nextInt(100)+10;
-        viewHolder.txtRating.setText("("+ratingCount+")");
-        int star = rand.nextInt(5)+1;
-        viewHolder.star1.setImageResource((star<=1)?R.drawable.ic_star_empty:R.drawable.ic_star_full);
-        viewHolder.star2.setImageResource((star<=2)?R.drawable.ic_star_empty:R.drawable.ic_star_full);
-        viewHolder.star3.setImageResource((star<=3)?R.drawable.ic_star_empty:R.drawable.ic_star_full);
-        viewHolder.star4.setImageResource((star<=4)?R.drawable.ic_star_empty:R.drawable.ic_star_full);
-        viewHolder.star5.setImageResource((star<=5)?R.drawable.ic_star_empty:R.drawable.ic_star_full);
+        viewHolder.txtRating.setText("("+appInfo.getRatingCount()+")");
+        viewHolder.star1.setImageResource((appInfo.getRatingStar()>=1)?R.drawable.ic_star_full:R.drawable.ic_star_empty);
+        viewHolder.star2.setImageResource((appInfo.getRatingStar()>=2)?R.drawable.ic_star_full:R.drawable.ic_star_empty);
+        viewHolder.star3.setImageResource((appInfo.getRatingStar()>=3)?R.drawable.ic_star_full:R.drawable.ic_star_empty);
+        viewHolder.star4.setImageResource((appInfo.getRatingStar()>=4)?R.drawable.ic_star_full:R.drawable.ic_star_empty);
+        viewHolder.star5.setImageResource((appInfo.getRatingStar()>=5)?R.drawable.ic_star_full:R.drawable.ic_star_empty);
 
         PropertiesImage img = appInfo.image.get(0);
         int length = Integer.parseInt(img.attributes.height);
